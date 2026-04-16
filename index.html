@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PearlCare Dental — Where Confidence Begins</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <header id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>PearlCare <em>Dental</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#booking-form" class="btn-nav">Book Free Consult</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#booking-form" class="btn-mobile">Book Free Consult</a>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-grid">
+      <div class="hero-content" data-reveal>
+        <p class="hero-eyebrow">Trusted by 2,400+ patients in Sydney</p>
+        <h1>
+          Your Most Confident<br />
+          <em>Smile</em> Starts Here
+        </h1>
+        <p class="hero-sub">
+          World-class aesthetic dentistry — from a single whitening to full smile
+          makeovers — delivered in a calm, judgment-free environment.
+        </p>
+        <div class="hero-ctas">
+          <a href="#booking-form" class="btn-primary">
+            Claim Your Free Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#services" class="btn-ghost">Explore Treatments</a>
+        </div>
+        <div class="hero-badges">
+          <div class="badge">
+            <span class="badge-icon">★★★★★</span>
+            <span>5.0 Google Rating</span>
+          </div>
+          <div class="badge">
+            <span class="badge-icon">✓</span>
+            <span>All Health Funds Accepted</span>
+          </div>
+          <div class="badge">
+            <span class="badge-icon">⏱</span>
+            <span>Same-Day Appointments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO FORM -->
+      <div class="hero-form-card" id="booking-form" data-reveal data-delay="200">
+        <div class="form-header">
+          <h3>Book Your <em>Free</em> Consultation</h3>
+          <p>No commitment. No pressure. Just a conversation about your smile.</p>
+        </div>
+        <form id="consultForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" placeholder="Jane" required />
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Smith" required />
+              <span class="err-msg"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@email.com" required />
+            <span class="err-msg"></span>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" required />
+            <span class="err-msg"></span>
+          </div>
+          <div class="field">
+            <label for="service">I'm Interested In…</label>
+            <div class="select-wrap">
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a treatment</option>
+                <option>Teeth Whitening</option>
+                <option>Dental Implants</option>
+                <option>Porcelain Veneers</option>
+                <option>Invisalign / Braces</option>
+                <option>Smile Makeover</option>
+                <option>General Check-Up</option>
+                <option>Emergency Dental</option>
+                <option>Other / Not Sure</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <span class="err-msg"></span>
+          </div>
+          <div class="field">
+            <label for="message">Anything Else? <span class="optional">(Optional)</span></label>
+            <textarea id="message" name="message" rows="3" placeholder="Tell us a little about your goals…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-text">Reserve My Free Spot</span>
+            <span class="btn-loader hidden">
+              <svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+            </span>
+          </button>
+          <p class="form-note">🔒 100% private. We'll never spam you or share your info.</p>
+        </form>
+        <div class="form-success hidden" id="formSuccess">
+          <div class="success-icon">✦</div>
+          <h3>You're booked in!</h3>
+          <p>Our team will call you within <strong>24 hours</strong> to confirm your free consultation. Check your email for the confirmation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- floating scroll hint -->
+    <a href="#stats" class="scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- ── STATS STRIP ── -->
+  <section id="stats">
+    <div class="stats-inner">
+      <div class="stat" data-reveal>
+        <span class="stat-num" data-count="2400">0</span><span class="stat-suffix">+</span>
+        <p>Happy Patients</p>
+      </div>
+      <div class="stat" data-reveal data-delay="100">
+        <span class="stat-num" data-count="18">0</span><span class="stat-suffix"> yrs</span>
+        <p>Clinical Experience</p>
+      </div>
+      <div class="stat" data-reveal data-delay="200">
+        <span class="stat-num" data-count="98">0</span><span class="stat-suffix">%</span>
+        <p>Patient Satisfaction</p>
+      </div>
+      <div class="stat" data-reveal data-delay="300">
+        <span class="stat-num" data-count="15">0</span><span class="stat-suffix">+</span>
+        <p>Treatment Options</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST BANNER ── -->
+  <div class="trust-banner">
+    <div class="trust-inner">
+      <span>All Health Funds Accepted</span>
+      <span class="divider">|</span>
+      <span>Afterpay &amp; Zip Available</span>
+      <span class="divider">|</span>
+      <span>Interest-Free Payment Plans</span>
+      <span class="divider">|</span>
+      <span>No Hidden Fees, Ever</span>
+      <span class="divider">|</span>
+      <span>Emergency Same-Day Appointments</span>
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-label" data-reveal>Our Treatments</div>
+      <h2 data-reveal>Everything Your Smile<br /><em>Could Ever Need</em></h2>
+      <p class="section-sub" data-reveal>From routine care to complete transformations — all under one roof, by a team that genuinely cares.</p>
+
+      <div class="services-grid">
+
+        <div class="service-card featured" data-reveal>
+          <div class="service-icon">◈</div>
+          <h3>Smile Makeover</h3>
+          <p>A fully personalised treatment plan combining veneers, whitening, alignment, and contouring to give you the smile you've always imagined.</p>
+          <a href="#booking-form" class="card-cta">Get a Free Plan →</a>
+        </div>
+
+        <div class="service-card" data-reveal data-delay="80">
+          <div class="service-icon">◇</div>
+          <h3>Porcelain Veneers</h3>
+          <p>Ultra-thin ceramic shells that correct chips, stains, gaps, and shape — permanently. Results that look and feel completely natural.</p>
+          <a href="#booking-form" class="card-cta">Learn More →</a>
+        </div>
+
+        <div class="service-card" data-reveal data-delay="160">
+          <div class="service-icon">○</div>
+          <h3>Dental Implants</h3>
+          <p>Permanent tooth replacement that looks, feels, and functions exactly like your natural teeth. The gold standard in tooth restoration.</p>
+          <a href="#booking-form" class="card-cta">Learn More →</a>
+        </div>
+
+        <div class="service-card" data-reveal data-delay="240">
+          <div class="service-icon">✦</div>
+          <h3>Teeth Whitening</h3>
+          <p>Clinically-grade whitening that lifts your smile several shades in a single session — no sensitivity, no downtime.</p>
+          <a href="#booking-form" class="card-cta">Learn More →</a>
+        </div>
+
+        <div class="service-card" data-reveal data-delay="320">
+          <div class="service-icon">⌂</div>
+          <h3>Invisalign</h3>
+          <p>Straighten your teeth discreetly with clear, removable aligners. No wires, no brackets — just a progressively better smile.</p>
+          <a href="#booking-form" class="card-cta">Learn More →</a>
+        </div>
+
+        <div class="service-card" data-reveal data-delay="400">
+          <div class="service-icon">⊕</div>
+          <h3>General &amp; Preventive</h3>
+          <p>Check-ups, cleans, fillings, root canals, and more. We keep your oral health in peak condition so bigger problems never arise.</p>
+          <a href="#booking-form" class="card-cta">Learn More →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT / WHY US ── -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-visual" data-reveal>
+        <div class="about-img-block">
+          <div class="img-placeholder">
+            <div class="img-text">
+              <span class="big-num">18<sup>+</sup></span>
+              <span>Years of<br />Excellence</span>
+            </div>
+          </div>
+          <div class="about-accent-card">
+            <strong>"Best Dental Practice"</strong>
+            <span>— Sydney Health Awards 2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text" data-reveal data-delay="150">
+        <div class="section-label">Why PearlCare</div>
+        <h2>Dentistry That Respects<br /><em>Your Time, Budget & Nerves</em></h2>
+        <p class="about-lead">We know most people avoid the dentist — not because they don't care about their smile, but because they've had cold, rushed, or uncomfortable experiences. We built PearlCare to be different.</p>
+        <ul class="why-list">
+          <li>
+            <div class="why-icon">✓</div>
+            <div>
+              <strong>Transparent Pricing, Always</strong>
+              <p>You'll know exactly what your treatment costs before we begin. Zero surprises on the bill.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-icon">✓</div>
+            <div>
+              <strong>Anxiety-Friendly Environment</strong>
+              <p>Calming spaces, gentle techniques, and a team that listens — dental anxiety is treated with as much care as your teeth.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-icon">✓</div>
+            <div>
+              <strong>Technology That Protects You</strong>
+              <p>Digital X-rays, intraoral cameras, and 3D smile previews — so you see the result before we even begin.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-icon">✓</div>
+            <div>
+              <strong>Flexible Payment Plans</strong>
+              <p>Afterpay, Zip, and interest-free plans mean your dream smile doesn't have to wait for the right paycheck.</p>
+            </div>
+          </li>
+        </ul>
+        <a href="#booking-form" class="btn-primary">Start With a Free Consult →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="section-label" data-reveal>Real Stories</div>
+      <h2 data-reveal>Smiles That Speak<br /><em>For Themselves</em></h2>
+      <div class="testimonial-track" id="testimonialTrack">
+
+        <div class="t-card" data-reveal>
+          <div class="stars">★★★★★</div>
+          <p>"I'd been putting off veneers for three years out of fear. The PearlCare team walked me through every step, showed me a digital preview, and the result was beyond anything I'd imagined. I smile in photos now — that's huge."</p>
+          <div class="t-author">
+            <div class="t-avatar">S</div>
+            <div>
+              <strong>Sarah M.</strong>
+              <span>Porcelain Veneers, Double Bay</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-card" data-reveal data-delay="100">
+          <div class="stars">★★★★★</div>
+          <p>"After losing a tooth in an accident I was devastated. The implant they gave me is indistinguishable from my natural teeth. The process was well explained, the aftercare was thorough — honestly a 10/10 experience."</p>
+          <div class="t-author">
+            <div class="t-avatar">J</div>
+            <div>
+              <strong>James T.</strong>
+              <span>Dental Implant, Bondi Junction</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-card" data-reveal data-delay="200">
+          <div class="stars">★★★★★</div>
+          <p>"I was quoted $3,000 more at another clinic for the same Invisalign treatment. The payment plan here made it stress-free, and my teeth are now perfectly straight after 10 months. Best investment I've made."</p>
+          <div class="t-author">
+            <div class="t-avatar">P</div>
+            <div>
+              <strong>Priya K.</strong>
+              <span>Invisalign, Surry Hills</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="t-dots">
+        <button class="dot active" data-index="0"></button>
+        <button class="dot" data-index="1"></button>
+        <button class="dot" data-index="2"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── URGENCY CTA STRIP ── -->
+  <section id="urgency">
+    <div class="urgency-inner" data-reveal>
+      <div>
+        <p class="urgency-eyebrow">Limited Availability This Month</p>
+        <h2>Free Consultations — <em>Only 8 Spots Left</em></h2>
+        <p>We limit free consults each month to ensure every patient gets genuine time with our specialists, not a rushed 5-minute pitch.</p>
+      </div>
+      <a href="#booking-form" class="btn-white">Claim My Spot Before It's Gone →</a>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="section-inner faq-inner">
+      <div class="section-label" data-reveal>Common Questions</div>
+      <h2 data-reveal>You've Got Questions.<br /><em>We Have Answers.</em></h2>
+
+      <div class="faq-grid">
+        <div class="faq-col">
+          <div class="faq-item" data-reveal>
+            <button class="faq-q">Does the free consultation come with any obligation?<span>+</span></button>
+            <div class="faq-a"><p>Absolutely not. The free consultation is a genuine opportunity for you to ask questions, understand your options, and get a professional assessment — with zero sales pressure. We believe informed patients make better decisions.</p></div>
+          </div>
+          <div class="faq-item" data-reveal data-delay="100">
+            <button class="faq-q">How much does a smile makeover typically cost?<span>+</span></button>
+            <div class="faq-a"><p>Smile makeover costs vary based on treatments involved. We provide complete, itemised quotes before any work begins — no hidden fees. With our payment plans, many patients start treatment for as little as $0 upfront.</p></div>
+          </div>
+          <div class="faq-item" data-reveal data-delay="200">
+            <button class="faq-q">Do you accept my health fund?<span>+</span></button>
+            <div class="faq-a"><p>We accept all major health funds including Bupa, Medibank, NIB, CBHS, and HCF. We're a Members' Choice provider for several funds, which means higher rebates for you. Bring your card and we'll process it in-chair.</p></div>
+          </div>
+        </div>
+        <div class="faq-col">
+          <div class="faq-item" data-reveal data-delay="100">
+            <button class="faq-q">I have dental anxiety. Will I be okay?<span>+</span></button>
+            <div class="faq-a"><p>You are not alone — dental anxiety is something we take seriously and treat with genuine care. Our practice offers calming techniques, gentle local anaesthesia, and we never rush. Many anxious patients tell us we changed how they feel about dentistry.</p></div>
+          </div>
+          <div class="faq-item" data-reveal data-delay="200">
+            <button class="faq-q">How long do veneers or implants last?<span>+</span></button>
+            <div class="faq-a"><p>With proper care, porcelain veneers last 10–20 years and dental implants can last a lifetime. We use premium-grade materials and provide comprehensive aftercare guidance to maximise the longevity of your investment.</p></div>
+          </div>
+          <div class="faq-item" data-reveal data-delay="300">
+            <button class="faq-q">Can I get a same-day emergency appointment?<span>+</span></button>
+            <div class="faq-a"><p>Yes. We reserve emergency slots every day for patients in pain or with urgent dental needs. Call us first thing in the morning and we will fit you in the same day — because dental pain should never have to wait.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section id="final-cta">
+    <div class="final-cta-inner" data-reveal>
+      <span class="section-label">Take the First Step</span>
+      <h2>Your Best Smile Is<br /><em>One Click Away</em></h2>
+      <p>Join thousands of patients who chose PearlCare and transformed not just their smile — but their confidence, first impressions, and daily joy. Your free consultation is waiting.</p>
+      <a href="#booking-form" class="btn-primary large">
+        Book My Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <p class="cta-reassure">⏱ Takes 60 seconds. No credit card. No commitment.</p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">✦</span>
+          <span>PearlCare <em>Dental</em></span>
+        </a>
+        <p>World-class aesthetic dentistry in a warm, welcoming environment. Serving Sydney since 2006.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Facebook">fb</a>
+          <a href="#" aria-label="Google">g+</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Treatments</h4>
+        <a href="#booking-form">Smile Makeover</a>
+        <a href="#booking-form">Porcelain Veneers</a>
+        <a href="#booking-form">Dental Implants</a>
+        <a href="#booking-form">Teeth Whitening</a>
+        <a href="#booking-form">Invisalign</a>
+        <a href="#booking-form">General Dentistry</a>
+      </div>
+      <div class="footer-links">
+        <h4>Clinic</h4>
+        <a href="#about">About Us</a>
+        <a href="#testimonials">Patient Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#booking-form">Emergency Dental</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>7 Transvaal Avenue,<br />Double Bay NSW 2028</p>
+        <a href="tel:0293621188">(02) 9362 1188</a>
+        <a href="mailto:hello@pearlcaredental.com.au">hello@pearlcaredental.com.au</a>
+        <p class="hours">Mon–Fri: 8am – 6pm<br />Sat: 8am – 2pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 PearlCare Dental. All rights reserved. ABN 00 000 000 000</p>
+      <div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- sticky mobile CTA -->
+  <div class="sticky-cta-bar" id="stickyCta">
+    <a href="tel:0293621188" class="sticky-call">📞 Call Us</a>
+    <a href="#booking-form" class="sticky-book">Book Free Consult</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
