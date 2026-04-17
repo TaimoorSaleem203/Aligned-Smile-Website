@@ -32,28 +32,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── 4. CUSTOM CURSOR ── */
-  const cursor = document.getElementById('cursor');
-  const cursorDot = document.getElementById('cursorDot');
-  let mx = -100, my = -100, cx = -100, cy = -100;
+  // const cursor = document.getElementById('cursor');
+  // const cursorDot = document.getElementById('cursorDot');
+  // let mx = -100, my = -100, cx = -100, cy = -100;
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursorDot.style.left = mx + 'px';
-    cursorDot.style.top  = my + 'px';
-  });
-  function animateCursor() {
-    cx += (mx - cx) * 0.12;
-    cy += (my - cy) * 0.12;
-    cursor.style.left = cx + 'px';
-    cursor.style.top  = cy + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
+  // document.addEventListener('mousemove', e => {
+  //   mx = e.clientX; my = e.clientY;
+  //   cursorDot.style.left = mx + 'px';
+  //   cursorDot.style.top  = my + 'px';
+  // });
+  // function animateCursor() {
+  //   cx += (mx - cx) * 0.12;
+  //   cy += (my - cy) * 0.12;
+  //   cursor.style.left = cx + 'px';
+  //   cursor.style.top  = cy + 'px';
+  //   requestAnimationFrame(animateCursor);
+  // }
+  // animateCursor();
 
-  document.querySelectorAll('a, button, .svc-card, .tcard, .doc-card, .faq-q').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-  });
+  // document.querySelectorAll('a, button, .svc-card, .tcard, .doc-card, .faq-q').forEach(el => {
+  //   el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+  //   el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+  // });
 
   /* ── 5. HERO HEADLINE word-stagger ── */
   function fireWords() {
