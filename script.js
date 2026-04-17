@@ -24,7 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ── 3. REVEAL ON SCROLL (IntersectionObserver) ── */
+  /* ── 3. HERO HEADLINE: word-by-word stagger on load ── */
+  function fireHeadlineWords() {
+    const words = document.querySelectorAll('.h1-word');
+    words.forEach((word, i) => {
+      setTimeout(() => {
+        word.classList.add('in-view');
+      }, 120 + i * 110);
+    });
+  }
+  // Fire immediately — hero is already visible on load
+  window.addEventListener('load', fireHeadlineWords);
+  // Fallback in case load already fired
+  if (document.readyState === 'complete') fireHeadlineWords();
+
+  /* ── 3b. REVEAL ON SCROLL (IntersectionObserver) for all other elements ── */
   const revealItems = document.querySelectorAll('[data-reveal]');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -203,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
   if (bookingForm) stickyObserver.observe(bookingForm);
 
-  /* ── 10. SUBTLE PARALLAX on hero background ── */
+  /* ── 10. SUBTLE PARALLAX on hero image ── */
+  const heroBgImg = document.getElementById('heroBgImg');
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;
-    const hero = document.getElementById('hero');
-    if (hero && scrolled < window.innerHeight) {
-      hero.style.backgroundPositionY = `${scrolled * 0.25}px`;
+    if (heroBgImg && scrolled < window.innerHeight * 1.2) {
+      heroBgImg.style.transform = `scale(1.08) translateX(-1.5%) translateY(calc(-1% + ${scrolled * 0.12}px))`;
     }
   }, { passive: true });
 

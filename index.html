@@ -40,39 +40,83 @@
 
   <!-- ── HERO ── -->
   <section id="hero">
-    <div class="hero-bg-overlay"></div>
+
+    <!-- Full-screen background image (Ken Burns slow zoom) -->
+    <div class="hero-media">
+      <img
+        src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1920&q=85"
+        alt="Happy patient with a beautiful confident smile after dental treatment"
+        class="hero-bg-img"
+        id="heroBgImg"
+        fetchpriority="high"
+      />
+      <!-- layered overlays: deep navy tint + radial vignette + gradient fade -->
+      <div class="hero-overlay hero-overlay--tint"></div>
+      <div class="hero-overlay hero-overlay--vignette"></div>
+      <div class="hero-overlay hero-overlay--bottom-fade"></div>
+    </div>
+
     <div class="hero-grid">
-      <div class="hero-content" data-reveal>
-        <p class="hero-eyebrow">Trusted by 2,400+ patients in Sydney</p>
-        <h1>
-          Your Most Confident<br />
-          <em>Smile</em> Starts Here
+      <div class="hero-content">
+
+        <!-- Eyebrow pill -->
+        <div class="hero-eyebrow" data-reveal>
+          <span class="eyebrow-dot"></span>
+          Trusted by 2,400+ patients in Sydney
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <!-- Main headline — words animate in one by one -->
+        <h1 class="hero-headline">
+          <span class="h1-line" data-reveal data-delay="80">
+            <span class="h1-word">Your</span>
+            <span class="h1-word">Most</span>
+            <span class="h1-word">Confident</span>
+          </span>
+          <span class="h1-line h1-line--gold" data-reveal data-delay="240">
+            <span class="h1-word">Smile</span>
+            <span class="h1-word h1-word--light">Starts&nbsp;Here</span>
+          </span>
         </h1>
-        <p class="hero-sub">
+
+        <!-- Gold rule -->
+        <div class="hero-rule" data-reveal data-delay="420">
+          <span class="rule-line"></span>
+          <span class="rule-diamond">◆</span>
+          <span class="rule-line"></span>
+        </div>
+
+        <p class="hero-sub" data-reveal data-delay="520">
           World-class aesthetic dentistry — from a single whitening to full smile
           makeovers — delivered in a calm, judgment-free environment.
         </p>
-        <div class="hero-ctas">
+
+        <div class="hero-ctas" data-reveal data-delay="640">
           <a href="#booking-form" class="btn-primary">
             Claim Your Free Consultation
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#services" class="btn-ghost">Explore Treatments</a>
         </div>
-        <div class="hero-badges">
+
+        <!-- Trust badges row -->
+        <div class="hero-badges" data-reveal data-delay="760">
           <div class="badge">
             <span class="badge-icon">★★★★★</span>
             <span>5.0 Google Rating</span>
           </div>
+          <div class="badge-divider"></div>
           <div class="badge">
             <span class="badge-icon">✓</span>
             <span>All Health Funds Accepted</span>
           </div>
+          <div class="badge-divider"></div>
           <div class="badge">
             <span class="badge-icon">⏱</span>
             <span>Same-Day Appointments</span>
           </div>
         </div>
+
       </div>
 
       <!-- HERO FORM -->
