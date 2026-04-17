@@ -1,229 +1,222 @@
-/* ========================================================
-   PearlCare Dental — script.js
-   ======================================================== */
+/* ============================================================
+   Penn Sharp Dental Surgeons — script.js
+   ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ── 1. NAVBAR: scroll behaviour ── */
+  /* ── 1. SCROLL PROGRESS BAR ── */
+  const scrollBar = document.getElementById('scrollBar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    if (scrollBar) scrollBar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  /* ── 2. NAVBAR scroll state ── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  /* ── 2. HAMBURGER MENU ── */
+  /* ── 3. HAMBURGER MENU ── */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
   });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
     });
   });
 
-  /* ── 3. HERO HEADLINE: word-by-word stagger on load ── */
-  function fireHeadlineWords() {
-    const words = document.querySelectorAll('.h1-word');
-    words.forEach((word, i) => {
-      setTimeout(() => {
-        word.classList.add('in-view');
-      }, 120 + i * 110);
+  /* ── 4. CUSTOM CURSOR ── */
+  const cursor = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  let mx = -100, my = -100, cx = -100, cy = -100;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursorDot.style.left = mx + 'px';
+    cursorDot.style.top  = my + 'px';
+  });
+  function animateCursor() {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .svc-card, .tcard, .doc-card, .faq-q').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+  });
+
+  /* ── 5. HERO HEADLINE word-stagger ── */
+  function fireWords() {
+    document.querySelectorAll('.hw').forEach((w, i) => {
+      setTimeout(() => w.classList.add('in'), 100 + i * 120);
     });
   }
-  // Fire immediately — hero is already visible on load
-  window.addEventListener('load', fireHeadlineWords);
-  // Fallback in case load already fired
-  if (document.readyState === 'complete') fireHeadlineWords();
+  if (document.readyState === 'complete') { fireWords(); }
+  else { window.addEventListener('load', fireWords); }
 
-  /* ── 3b. REVEAL ON SCROLL (IntersectionObserver) for all other elements ── */
-  const revealItems = document.querySelectorAll('[data-reveal]');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = parseInt(entry.target.dataset.delay || 0);
-        setTimeout(() => {
-          entry.target.classList.add('revealed');
-        }, delay);
-        revealObserver.unobserve(entry.target);
+  /* ── 6. SCROLL REVEAL ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('revealed'), delay);
+        revealObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  revealItems.forEach(item => revealObserver.observe(item));
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
 
-  /* ── 4. COUNTER ANIMATION ── */
-  function animateCounter(el, target, duration = 1800) {
-    let start = 0;
-    const startTime = performance.now();
-    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
-
-    function tick(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const value = Math.round(easeOutCubic(progress) * target);
-      el.textContent = value.toLocaleString();
-      if (progress < 1) requestAnimationFrame(tick);
-    }
+  /* ── 7. COUNTER ANIMATION ── */
+  function countUp(el, target, dur = 1800) {
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const start = performance.now();
+    const tick = now => {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(ease(p) * target).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+    };
     requestAnimationFrame(tick);
   }
-
-  const statsSection = document.getElementById('stats');
-  let countersStarted = false;
-  const statsObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !countersStarted) {
-      countersStarted = true;
-      document.querySelectorAll('.stat-num[data-count]').forEach(el => {
-        animateCounter(el, parseInt(el.dataset.count));
+  let counted = false;
+  const statsObs = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.sn[data-count]').forEach(el => {
+        countUp(el, parseInt(el.dataset.count));
       });
     }
   }, { threshold: 0.3 });
-  if (statsSection) statsObserver.observe(statsSection);
+  const statsEl = document.getElementById('stats');
+  if (statsEl) statsObs.observe(statsEl);
 
-  /* ── 5. FAQ ACCORDION ── */
+  /* ── 8. FAQ ACCORDION ── */
   document.querySelectorAll('.faq-item').forEach(item => {
-    const btn = item.querySelector('.faq-q');
-    btn.addEventListener('click', () => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.faq-item.open').forEach(open => {
-        open.classList.remove('open');
-      });
-      // Open clicked if it wasn't open
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
     });
   });
 
-  /* ── 6. FORM VALIDATION & SUBMISSION ── */
+  /* ── 9. FORM VALIDATION ── */
   const form = document.getElementById('consultForm');
   const submitBtn = document.getElementById('submitBtn');
   const formSuccess = document.getElementById('formSuccess');
 
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-  function validatePhone(phone) {
-    return /^[\d\s\+\-\(\)]{7,}$/.test(phone.trim());
-  }
-  function showError(field, message) {
-    field.classList.add('error');
-    const err = field.closest('.field').querySelector('.err-msg');
-    if (err) err.textContent = message;
-  }
-  function clearError(field) {
-    field.classList.remove('error');
-    const err = field.closest('.field').querySelector('.err-msg');
-    if (err) err.textContent = '';
-  }
+  const emailRE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRE = /^[\d\s\+\-\(\)]{7,}$/;
 
-  // Live clear on input
-  form.querySelectorAll('input, select, textarea').forEach(el => {
-    el.addEventListener('input', () => clearError(el));
-    el.addEventListener('change', () => clearError(el));
+  function showErr(input, msg) {
+    input.classList.add('error');
+    const e = input.closest('.field')?.querySelector('.err');
+    if (e) e.textContent = msg;
+  }
+  function clearErr(input) {
+    input.classList.remove('error');
+    const e = input.closest('.field')?.querySelector('.err');
+    if (e) e.textContent = '';
+  }
+  form.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', () => clearErr(el));
+    el.addEventListener('change', () => clearErr(el));
   });
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    let valid = true;
-
-    const fname = document.getElementById('fname');
-    const lname = document.getElementById('lname');
-    const email = document.getElementById('email');
-    const phone = document.getElementById('phone');
+    let ok = true;
+    const fname   = document.getElementById('fname');
+    const lname   = document.getElementById('lname');
+    const email   = document.getElementById('email');
+    const phone   = document.getElementById('phone');
     const service = document.getElementById('service');
 
-    if (!fname.value.trim()) { showError(fname, 'Please enter your first name'); valid = false; }
-    if (!lname.value.trim()) { showError(lname, 'Please enter your last name'); valid = false; }
-    if (!email.value.trim()) {
-      showError(email, 'Please enter your email'); valid = false;
-    } else if (!validateEmail(email.value)) {
-      showError(email, 'Please enter a valid email address'); valid = false;
-    }
-    if (!phone.value.trim()) {
-      showError(phone, 'Please enter your phone number'); valid = false;
-    } else if (!validatePhone(phone.value)) {
-      showError(phone, 'Please enter a valid phone number'); valid = false;
-    }
-    if (!service.value) { showError(service, 'Please select a treatment you\'re interested in'); valid = false; }
+    if (!fname.value.trim())  { showErr(fname,   'Please enter your first name'); ok = false; }
+    if (!lname.value.trim())  { showErr(lname,   'Please enter your last name');  ok = false; }
+    if (!email.value.trim())  { showErr(email,   'Please enter your email');       ok = false; }
+    else if (!emailRE.test(email.value)) { showErr(email, 'Please enter a valid email'); ok = false; }
+    if (!phone.value.trim())  { showErr(phone,   'Please enter your phone number'); ok = false; }
+    else if (!phoneRE.test(phone.value)) { showErr(phone, 'Please enter a valid number'); ok = false; }
+    if (!service.value)       { showErr(service, 'Please select a treatment');     ok = false; }
+    if (!ok) return;
 
-    if (!valid) return;
-
-    // Simulate submission
+    // Loading state
     submitBtn.classList.add('loading');
-    submitBtn.querySelector('.btn-text').classList.add('hidden');
-    submitBtn.querySelector('.btn-loader').classList.remove('hidden');
+    submitBtn.querySelector('.btn-txt').classList.add('hidden');
+    submitBtn.querySelector('.btn-spin').classList.remove('hidden');
 
-    await new Promise(resolve => setTimeout(resolve, 1800));
+    await new Promise(r => setTimeout(r, 1800)); // simulate
 
     form.classList.add('hidden');
     formSuccess.classList.remove('hidden');
-
-    // Scroll to form card on mobile
     document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
-  /* ── 7. SMOOTH SCROLL for anchor links ── */
+  /* ── 10. SMOOTH SCROLL ── */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', e => {
       const target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
-      const offset = 80;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 
-  /* ── 8. TESTIMONIAL DOTS (mobile carousel) ── */
-  const dots = document.querySelectorAll('.dot');
-  const cards = document.querySelectorAll('.t-card');
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const index = parseInt(dot.dataset.index);
-      dots.forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-      // On mobile: hide all, show only selected
-      if (window.innerWidth <= 768) {
-        cards.forEach((c, i) => {
-          c.style.display = i === index ? 'block' : 'none';
-        });
-      }
+  /* ── 11. PARALLAX on hero image ── */
+  const heroBgImg = document.getElementById('heroBgImg');
+  window.addEventListener('scroll', () => {
+    if (heroBgImg && window.scrollY < window.innerHeight * 1.2) {
+      heroBgImg.style.transform = `scale(1.08) translateX(-1.5%) translateY(calc(-1% + ${window.scrollY * 0.1}px))`;
+    }
+  }, { passive: true });
+
+  /* ── 12. FLOAT BAR: hide when hero form visible ── */
+  const floatBar = document.getElementById('floatBar');
+  const bookForm = document.getElementById('booking-form');
+  if (floatBar && bookForm) {
+    new IntersectionObserver(([e]) => {
+      floatBar.style.opacity = e.isIntersecting ? '0' : '1';
+      floatBar.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
+    }, { threshold: 0.2 }).observe(bookForm);
+  }
+
+  /* ── 13. SERVICE CARD tilt effect ── */
+  document.querySelectorAll('.svc-card:not(.svc-emergency)').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2)  / (r.width / 2);
+      const y = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+      card.style.transform = `translateY(-6px) rotateX(${-y * 3}deg) rotateY(${x * 3}deg)`;
+      card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'all 0.4s cubic-bezier(0.4,0,0.2,1)';
     });
   });
 
-  // Set up mobile testimonials on resize
-  function setupMobileTestimonials() {
-    if (window.innerWidth <= 768) {
-      cards.forEach((c, i) => {
-        c.style.display = i === 0 ? 'block' : 'none';
-      });
-      dots[0].classList.add('active');
-      dots.forEach(d => d.classList.remove('active'));
-      dots[0].classList.add('active');
-    } else {
-      cards.forEach(c => c.style.display = '');
-    }
-  }
-  setupMobileTestimonials();
-  window.addEventListener('resize', setupMobileTestimonials, { passive: true });
-
-  /* ── 9. STICKY CTA BAR: hide when form is visible ── */
-  const stickyCta = document.getElementById('stickyCta');
-  const bookingForm = document.getElementById('booking-form');
-  const stickyObserver = new IntersectionObserver((entries) => {
-    stickyCta.style.opacity = entries[0].isIntersecting ? '0' : '1';
-    stickyCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
-  }, { threshold: 0.2 });
-  if (bookingForm) stickyObserver.observe(bookingForm);
-
-  /* ── 10. SUBTLE PARALLAX on hero image ── */
-  const heroBgImg = document.getElementById('heroBgImg');
+  /* ── 14. NAV active link highlight on scroll ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    if (heroBgImg && scrolled < window.innerHeight * 1.2) {
-      heroBgImg.style.transform = `scale(1.08) translateX(-1.5%) translateY(calc(-1% + ${scrolled * 0.12}px))`;
-    }
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--gold)' : '';
+    });
   }, { passive: true });
 
 });
