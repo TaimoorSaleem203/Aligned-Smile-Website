@@ -273,7 +273,7 @@ body:hover .cursor,body:hover .cursor-dot{opacity:1}
 .doc-info p{color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.75;margin-bottom:18px}
 .doc-ig{display:inline-flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--gold);margin-bottom:18px;transition:var(--ease)}
 .doc-ig:hover{color:var(--gold-lt)}
-.doc-book{display:inline-block;font-size:0.88rem;font-weight:600;color:var(--teal-light);transition:var(--ease)}
+.doc-book{display:inline-block;color:var(--navy); ;font-size:0.88rem;font-weight:600;transition:var(--ease)}
 .doc-book:hover{color:var(--white);letter-spacing:0.02em}
 
 /* ── ABOUT ── */
@@ -352,15 +352,20 @@ body:hover .cursor,body:hover .cursor-dot{opacity:1}
 
 /* ── FOOTER ── */
 #footer{background:#06121e;padding:72px 24px 0}
+.insta-icon{color: var(--navy); font-weight: 500; padding: 5px; width: 35px; height: 35px; border-radius: 50%; display: flex; flex-direction: row; align-items: center; justify-content: center; font-size:1.2rem; background-color: var(--gold);}
+.f-social-tags{display: flex; align-items: center; gap: 10px; color: var(--gold);}
+.f-social-tags span{transition:var(--ease); color: rgba(255,255,255,0.4); font-size: 0.9rem;}
+.f-social-tags span:hover{color:var(--gold)}
 .footer-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;padding-bottom:52px;border-bottom:1px solid rgba(255,255,255,0.05)}
 .f-brand p{color:rgba(255,255,255,0.4);font-size:0.86rem;line-height:1.7;margin:14px 0 20px}
-.f-socials{display:flex;gap:10px}
-.f-socials a{width:36px;height:36px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--ease)}
-.f-socials a:hover{background:var(--gold);color:var(--navy)}
+.f-socials{display:flex;flex-direction: column;gap:15px}
+/* .f-socials a{width:36px;height:36px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--ease)} */
+/* .f-social-tags i:hover{background:var(--gold);color:var(--navy)} */
 .f-col h4,.f-contact h4{color:var(--white);font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
 .f-col{display:flex;flex-direction:column;gap:9px}
 .f-col a{color:rgba(255,255,255,0.4);font-size:0.86rem;transition:var(--ease)}
 .f-col a:hover{color:var(--gold)}
+
 .fci{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,0.4);font-size:0.86rem;margin-bottom:10px}
 .fci svg{flex-shrink:0;margin-top:2px;color:var(--gold)}
 .fci a{color:rgba(255,255,255,0.4);transition:var(--ease)}
@@ -401,6 +406,8 @@ body:hover .cursor,body:hover .cursor-dot{opacity:1}
   .stats-inner{flex-wrap:wrap}
   .stat{min-width:140px}
   .sdiv{display:none}
+  .insta-icon{font-size: 0.8rem;padding: 10px; width: 25px; height:25px}
+  .f-social-tags{font-size: 0.85rem;}
 }
 @media(max-width:768px){
   .nav-links,.nav-phone,.btn-nav-book{display:none}
@@ -420,6 +427,8 @@ body:hover .cursor,body:hover .cursor-dot{opacity:1}
   .hb-sep{display:none}
   .stats-inner{grid-template-columns:repeat(2,1fr);display:grid;gap:24px}
   .sdiv{display:none}
+  .insta-icon{font-size: 0.8rem;padding: 10px; width: 25px; height:25px}
+  .f-social-tags{font-size: 0.85rem;}
 }
 @media(max-width:480px){
   #hero{padding:120px 16px 60px}
@@ -428,4 +437,6 @@ body:hover .cursor,body:hover .cursor-dot{opacity:1}
   .hw{font-size:clamp(2rem,10vw,2.8rem)}
   .h-eyebrow{font-size:0.68rem;padding:7px 12px}
   .tv-badge{display:none}
+  .insta-icon{font-size: 0.8rem;padding: 10px; width: 25px; height:25px}
+  .f-social-tags{font-size: 0.8rem;}
 }
